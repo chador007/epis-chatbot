@@ -1,0 +1,8 @@
+# 1. Stop Qdrant
+docker compose down
+
+# 2. Delete the storage folder
+rm -rf qdrant_storage
+
+# 3. Start Qdrant again — fresh storage will be auto-created
+docker compose up -d

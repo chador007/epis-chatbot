@@ -1,0 +1,26 @@
+# RAG Chatbot Dependencies
+
+# Web framework
+fastapi
+uvicorn
+python-multipart
+
+# PDF processing
+PyPDF2
+
+# Text processing and chunking
+langchain
+ 
+
+# Embeddings
+sentence-transformers
+torch
+
+# Vector database
+qdrant-client
+
+# vLLM client (OpenAI-compatible)
+openai
+# Utilities
+pydantic
+python-dotenv
