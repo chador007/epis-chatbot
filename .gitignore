@@ -1,4 +1,20 @@
-/__pycache__
-/venv
-/qdrant_storage
-/.env
+# Python environment
+venv/
+env/
+ENV/
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Database / Local Storage
+qdrant_storage/
+
+# Sensitive Data
+.env
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# Large document folders (Optional - remove if you want to track them)
+documents/
