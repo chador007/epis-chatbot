@@ -2,19 +2,19 @@
 venv/
 env/
 ENV/
-__pycache__/
+.env
+
+# Ignore __pycache__ in EVERY directory
+**/__pycache__/
 *.py[cod]
 *$py.class
 
 # Database / Local Storage
 qdrant_storage/
 
-# Sensitive Data
-.env
-
 # OS-specific files
 .DS_Store
 Thumbs.db
 
-# Large document folders (Optional - remove if you want to track them)
+# Documents
 documents/
