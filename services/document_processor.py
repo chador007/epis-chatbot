@@ -20,7 +20,7 @@ class DocumentProcessor:
             reader = PyPDF2.PdfReader(file)
             for page in reader.pages:
                 text += page.extract_text() + "\n"
-        return 
+        return text
     
     def clean_text(self,text: str) -> str:
         if text is None:

@@ -1,39 +1,34 @@
-# services/chunking_service.py
 from typing import List
-from langchain_google_genai import ChatGoogleGenerativeAI
-import json
-from config import settings
 
 
 class ChunkingService:
-    def __init__(self):
-        self.llm = ChatGoogleGenerativeAI(
-            model="gemini-2.5-flash-lite",
-            temperature=0,
-            api_key=settings.GOOGLE_API_KEY
-        )
+    def __init__(self, chunk_size: int = 500, chunk_overlap: int = 50):
+        self.chunk_size = chunk_size
+        self.chunk_overlap = chunk_overlap
 
     def chunk(self, text: str) -> List[str]:
-        prompt = f"""Split the following text into semantically meaningful chunks.
-Each chunk should be a coherent, self-contained unit of information.
-Return ONLY a valid JSON array of strings — no explanation, no markdown.
+        """Split text into overlapping chunks at sentence boundaries."""
+        import re
 
-Example output format:
-["chunk one text here", "chunk two text here", "chunk three text here"]
+        # Split into sentences first
+        sentences = re.split(r'(?<=[.!?])\s+', text)
 
-Text to chunk:
-{text}"""
+        chunks = []
+        current_chunk = ""
 
-        try:
-            response = self.llm.invoke(prompt)
-            content = response.content.strip()
-            if content.startswith("```"):
-                content = content.split("```")[1]
-                if content.startswith("json"):
-                    content = content[4:]
-                content = content.strip()
-            return json.loads(content)
-        except json.JSONDecodeError:
-            return [text]
-        except Exception as e:
-            raise RuntimeError(f"LLM chunking failed: {e}") from e
+        for sentence in sentences:
+            # If adding this sentence exceeds chunk_size, save current and start new
+            if len(current_chunk) + len(sentence) > self.chunk_size and current_chunk:
+                chunks.append(current_chunk.strip())
+                
+                # Keep overlap by retaining the end of the current chunk
+                words = current_chunk.split()
+                overlap_text = " ".join(words[-self.chunk_overlap:]) if len(words) > self.chunk_overlap else current_chunk
+                current_chunk = overlap_text + " " + sentence
+            else:
+                current_chunk += " " + sentence
+
+        if current_chunk.strip():
+            chunks.append(current_chunk.strip())
+
+        return chunks

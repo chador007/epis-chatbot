@@ -1,10 +1,11 @@
 from fastapi import APIRouter, UploadFile, File
 from pathlib import Path
 
-from dependencies import doc_processor, vector_store, llm
+from networkx import hits
+
+from dependencies import doc_processor,chunking_service, vector_store, llm
 from models.schemas import QueryRequest, QueryResponse, SearchResultSchema
 
-from services.chunking_service import ChunkingService
 
 router = APIRouter()
 
@@ -20,9 +21,10 @@ async def upload(file: UploadFile = File(...)):
         f.write(await file.read())
 
     text = doc_processor.extract_text(str(file_path))
+
     cleaned_text = doc_processor.clean_text(text)
 
-    chunks = ChunkingService().chunk(cleaned_text)
+    chunks = chunking_service.chunk(cleaned_text)
 
     n = vector_store.add(chunks, {"document_name": file.filename})
 
@@ -34,18 +36,20 @@ async def query(req: QueryRequest):
 
     hits = vector_store.search(req.question, req.top_k)
 
-    context = [h.text for h in hits]  # ✅ dataclass attribute
+    context = [h["text"] for h in hits]
 
     answer = llm.generate(req.question, context)
+
+    print(answer)
 
     return QueryResponse(
         answer=answer,
         sources=[
-            SearchResultSchema(
-                text=h.text,
-                score=h.score,
-                chunk_id=h.chunk_id,
-                document_name=h.document_name
+             SearchResultSchema(
+                text=h["text"],          
+                score=h["score"],       
+                chunk_id=h["chunk_id"],  
+                document_name=h["document_name"]
             )
             for h in hits
         ]

@@ -1,18 +1,21 @@
 # services/llm_service.py
 from typing import List
-from openai import OpenAI
-import json
-from config import settings
 from langchain_google_genai import ChatGoogleGenerativeAI
+from langchain_core.messages import SystemMessage, HumanMessage
+from config import settings
 
 
 class LLMService:
-    def __init__(self, base_url: str, model: str):
-        self.client = OpenAI(base_url=base_url, api_key="dummy")
-        self.model = model
+    def __init__(self, model: str = "gemini-2.5-flash"):
+        self.llm = ChatGoogleGenerativeAI(
+            model=model,
+            temperature=0.3,
+            api_key=settings.GOOGLE_API_KEY
+        )
 
     def generate(self, query: str, context: List[str]) -> str:
         context_text = "\n\n".join(context)
+
         system_prompt = """
 # EPIS Expert Support Assistant - System Prompt
 
@@ -50,7 +53,7 @@ To ensure high readability, you must apply these formatting rules to every respo
 | **Navigation Paths** | `Menu > Sub-Module > Specific Action` | `Reception > Register Patient > New Registration` |
 | **UI Elements** | **Bold text** | Click the **Save** button |
 | **Steps** | Numbered lists | 1. First action<br>2. Second action |
-| **Troubleshooting** | Problem \| Solution table | See template below |
+| **Troubleshooting** | Problem \\| Solution table | See template below |
 | **High Priority Notes** | Blockquotes | `> ⚠️ Important: Always click Save before navigating away.` |
 | **Key-Value Pairs** | **Label:** Value | **Username:** Your Employee ID (EID) |
 | **URLs** | Bulleted list | • `https://epis.gov.bt/`<br>• `https://jdwnrh.epis.gov.bt/` |
@@ -165,60 +168,7 @@ When user identifies their role, prioritize content from these modules:
 
 ---
 
-## 8. Example Response
-
-Here's an example of a properly formatted response:
-
-### How to Login to EPIS
-
-Access the EPIS system using your Employee ID (EID) and password.
-
----
-
-**📍 Navigation Path:** `Web Browser > EPIS Portal`
-
----
-
-**Step-by-Step Instructions:**
-
-1. **Open any EPIS link** in your web browser:
-   - `https://epis.gov.bt/`
-   - `https://jdwnrh.epis.gov.bt/`
-   - `https://crrh.epis.gov.bt/`
-   - `https://errh.epis.gov.bt/`
-
-2. **Enter your credentials:**
-   - **Username:** Your Employee ID (EID)
-   - **Password:** Your EPIS password
-
-3. **Click the Login button**
-
-4. You will be redirected to your **hospital dashboard**
-
----
-
-> **💡 Pro-Tip:** Bookmark your hospital's specific EPIS link for faster access.
-
-> **⚠️ Important:** Both username and password are case-sensitive. Ensure Caps Lock is off.
-
----
-
-**🔍 Common Troubleshooting:**
-
-| If you see... | It means... | Do this... |
-|:---|:---|:---|
-| "Invalid credentials" | Wrong username or password | Verify your EID and reset password if needed |
-| Page not loading | Network or URL issue | Try a different EPIS link from the list above |
-| Dashboard blank | Role not assigned | Contact your Department Administrator |
-
----
-
-**Next Steps:**
-- Once logged in, navigate to your department module to begin your tasks
-
----
-
-## 9. What NOT to Do
+## 8. What NOT to Do
 
 | Prohibited Action | Alternative |
 |-------------------|-------------|
@@ -230,19 +180,16 @@ Access the EPIS system using your Employee ID (EID) and password.
 
 ---
 
-## 10. Final Instruction
+## 9. Final Instruction
 
 Always remember: You are helping healthcare professionals deliver patient care. Be **fast, accurate, and actionable**. If you can't find the answer in the documentation, direct them to the IT Helpdesk immediately rather than guessing.
-
-
 """
 
-        response = self.client.chat.completions.create(
-            model=self.model,
-            messages=[
-                {"role": "system", "content": system_prompt},
-                {"role": "user", "content": f"Context:\n{context_text}\n\nQuestion:{query}"}
-            ],
-            temperature=0.3
-        )
-        return response.choices[0].message.content
+        messages = [
+            SystemMessage(content=system_prompt),
+            HumanMessage(content=f"Context:\n{context_text}\n\nQuestion: {query}")
+        ]
+
+        response = self.llm.invoke(messages)
+
+        return response.content
