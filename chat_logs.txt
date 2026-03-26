@@ -1,0 +1,70 @@
+2026-03-26 14:23:47 - User Question: test
+2026-03-26 14:24:38 - User Question: lab test
+2026-03-26 14:25:46 - User Question: How to search a patient
+2026-03-26 14:33:39 - User Question: hi
+2026-03-26 14:34:54 - User Question: pharmacy
+2026-03-26 14:36:28 - User Question: reception
+2026-03-26 14:38:16 - User Question: how to change the patient age
+2026-03-26 14:40:22 - User Question: how can i register to the epis?
+2026-03-26 14:41:00 - User Question: how can i login into epis?
+2026-03-26 14:46:00 - User Question: how can i log into epis?
+2026-03-26 14:55:07 - User Question: hi
+2026-03-26 14:55:24 - User Question: hi
+2026-03-26 14:55:41 - User Question: hi
+2026-03-26 14:56:03 - User Question: hi
+2026-03-26 15:02:02 - User Question: hi
+2026-03-26 15:04:20 - User Question: hj
+2026-03-26 15:05:49 - User Question: jiji
+2026-03-26 15:06:16 - User Question: hi
+2026-03-26 15:08:13 - User Question: jkl
+2026-03-26 15:08:39 - User Question: hi
+2026-03-26 15:09:43 - User Question: hi
+2026-03-26 15:12:10 - User Question: hi
+2026-03-26 15:12:26 - User Question: hi
+2026-03-26 15:14:04 - User Question: hi
+2026-03-26 15:16:40 - User Question: reception
+2026-03-26 15:17:38 - User Question: hi
+2026-03-26 15:20:43 - User Question: gu
+2026-03-26 15:22:42 - User Question: hi
+2026-03-26 15:22:51 - User Question: ping
+2026-03-26 15:23:22 - User Question: hi
+2026-03-26 15:23:53 - User Question: hi
+2026-03-26 15:24:15 - User Question: reception
+2026-03-26 15:25:31 - User Question: hi
+2026-03-26 15:25:46 - User Question: hello
+2026-03-26 15:27:33 - User Question: hi
+2026-03-26 15:29:17 - User Question: hi
+2026-03-26 15:30:29 - User Question: hi
+2026-03-26 15:31:43 - User Question: hi
+2026-03-26 15:35:45 - User Question: wd
+2026-03-26 15:38:03 - User Question: hi
+2026-03-26 15:39:15 - User Question: hi
+2026-03-26 15:39:25 - User Question: how to register in epis?
+2026-03-26 15:39:59 - User Question: hello
+2026-03-26 15:44:51 - User Question: how to register to epis?
+2026-03-26 15:45:04 - User Question: how to login into epis?
+2026-03-26 15:46:39 - User Question: how to register to epis?
+2026-03-26 15:47:36 - User Question: how can to add new drug?
+2026-03-26 15:48:48 - User Question: how to add new drug?
+2026-03-26 15:50:18 - User Question: what is this
+2026-03-26 15:51:21 - User Question: when was this chatbot made?
+2026-03-26 15:51:34 - User Question: who created you?
+2026-03-26 15:52:01 - User Question: i want to book an appointement with a dentist
+2026-03-26 15:53:49 - User Question: hi
+2026-03-26 15:58:03 - User Question: hello
+2026-03-26 15:58:39 - User Question: hi
+2026-03-26 15:58:56 - User Question: hi
+2026-03-26 16:00:18 - User Question: What is UHID No
+2026-03-26 16:01:43 - User Question: ddd
+2026-03-26 16:03:01 - User Question: test
+2026-03-26 16:05:32 - User Question: kkk
+2026-03-26 16:06:22 - User Question: hi
+2026-03-26 16:06:33 - User Question: refre
+2026-03-26 16:13:41 - User Question: hi
+2026-03-26 16:19:07 - User Question: hi
+2026-03-26 16:20:07 - User Question: hi
+2026-03-26 16:20:22 - User Question: how can i log into the epis
+2026-03-26 16:23:21 - User Question: how can i log into epis?
+2026-03-26 16:23:40 - User Question: hello
+2026-03-26 16:23:49 - User Question: hi
+2026-03-26 16:23:54 - User Question: reception
