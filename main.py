@@ -6,6 +6,13 @@ from routers.chat_router import router
 
 app = FastAPI(title="ePIS RAG Chatbot")
 
+# origins = [
+#     "http://localhost:3000",
+#     "http://127.0.0.1:3000",
+#     "https://my-cool-app.com",
+#     "https://api.my-cool-app.com",
+# ]
+
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
